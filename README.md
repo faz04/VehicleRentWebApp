@@ -1,133 +1,252 @@
-# VehicleRentalWebApp
+# 🚗 Vehicle Rental Web Application
 
-A Java Jakarta EE web application for vehicle rental operations, featuring user registration, vehicle browsing, booking with payment slip upload, admin management, and text-file-based persistence.
+A production-ready **Java Jakarta EE web application** for managing vehicle rental operations. The system provides secure user registration and authentication, vehicle browsing, online booking with payment slip uploads, administrative management, reviews, notifications, and a complete file-based persistence layer.
 
-## Key Features
+---
 
-- User registration and login
-- Browse available vehicles with sorting options
-- Book rentals with date validation and payment slip upload (JPEG, max 5MB)
-- User dashboard for viewing bookings and notifications
-- Admin login with full management access
-- Admin vehicle management (add, edit, delete)
-- Booking approval and rejection workflow
-- Notifications management visible to users and admins
-- Review submission and display for authenticated users
-- File-based persistence using `WEB-INF` text files
+## 🛠️ Tech Stack
 
-## Architecture
+| Layer | Technology |
+|--------|------------|
+| Backend | Java 23, Jakarta EE |
+| Web Framework | Jakarta Servlets 6.1, JSP |
+| Frontend | HTML5, CSS3, Tailwind CSS, JavaScript |
+| Build Tool | Apache Maven |
+| Server | Apache Tomcat 11+ |
+| Storage | File-Based Persistence (`WEB-INF` Text Files) |
 
-- Java 23
-- Maven WAR project
-- Jakarta Servlet API 6.1.0
-- JSP views powered by Tailwind CSS via CDN
-- Data stored in `src/main/webapp/WEB-INF/` as plain text files
-- Servlet annotations are used for request mappings
+---
 
-## Project Structure
+## 📁 Project Structure
 
-- `src/main/java/` — application servlets and model classes
-- `src/main/webapp/` — JSP pages and static assets
-- `src/main/webapp/WEB-INF/` — application data files and deployment descriptor
-- `pom.xml` — Maven build configuration
+```text
+src/
+├── main/
+│   ├── java/com/vehicle/rental/vehiclerentalwebapp/
+│   │   ├── controller/          ← Servlet controllers
+│   │   ├── model/               ← Java model classes
+│   │   ├── service/             ← Business logic
+│   │   ├── repository/          ← File handling utilities
+│   │   └── util/                ← Helper classes
+│   │
+│   ├── webapp/
+│   │   ├── css/
+│   │   ├── images/
+│   │   ├── uploads/             ← Payment slip uploads
+│   │   ├── WEB-INF/
+│   │   │   ├── users.txt
+│   │   │   ├── admin.txt
+│   │   │   ├── vehicles.txt
+│   │   │   ├── bookings.txt
+│   │   │   ├── reviews.txt
+│   │   │   ├── notifications.txt
+│   │   │   └── web.xml
+│   │   └── *.jsp                ← JSP pages
+│   │
+│   └── resources/
+└── pom.xml
+```
 
-## Data Files
+---
 
-The application uses simple text files under `src/main/webapp/WEB-INF/`:
+## ✨ Features
 
-- `users.txt` — registered user accounts
-- `admin.txt` — admin credentials
-- `vehicles.txt` — available vehicle inventory
-- `bookings.txt` — booking records
-- `reviews.txt` — user reviews
-- `notifications.txt` — notifications for users and admins
+### 👤 User Features
 
-> Note: These files are empty by default, so initial admin credentials must be seeded manually before admin login.
+- User Registration
+- Secure Login
+- Browse Available Vehicles
+- Search & Sort Vehicles
+- Vehicle Booking
+- Payment Slip Upload (JPEG, Max 5MB)
+- Booking History
+- Notification Center
+- Submit Reviews
 
-## Setup and Run
+### 👨‍💼 Administrator Features
+
+- Secure Admin Login
+- Dashboard Overview
+- Add New Vehicles
+- Update Vehicle Details
+- Delete Vehicles
+- Approve Bookings
+- Reject Bookings
+- Manage Users
+- Manage Admin Accounts
+- Send Notifications
+
+---
+
+## 📋 Application Modules
+
+| Module | Description |
+|---------|-------------|
+| Authentication | User & Admin Login System |
+| Vehicle Management | Add, Edit, Delete Vehicles |
+| Booking Management | Rental Reservations |
+| Payment Management | Payment Slip Upload |
+| Review Management | Customer Reviews |
+| Notification System | Admin/User Notifications |
+| File Storage | Text File Database |
+
+---
+
+## 📂 Data Storage
+
+The application stores data inside the **WEB-INF** directory using plain text files.
+
+| File | Purpose |
+|------|---------|
+| `users.txt` | Registered Users |
+| `admin.txt` | Administrator Accounts |
+| `vehicles.txt` | Vehicle Inventory |
+| `bookings.txt` | Rental Bookings |
+| `reviews.txt` | Customer Reviews |
+| `notifications.txt` | User/Admin Notifications |
+
+> **Note:** These files are empty by default and act as the application's lightweight database.
+
+---
+
+## 🚀 Getting Started
 
 ### Prerequisites
 
-- Java 23 or later
-- Maven (or use provided Maven wrapper)
-- A Jakarta EE-compatible servlet container such as Apache Tomcat 11+
+- Java 23+
+- Maven 3.9+
+- Apache Tomcat 11+
 
-### Build
+---
 
-From the project root:
+### Clone Repository
 
-```powershell
-.\
-\mvnw clean package
+```bash
+git clone https://github.com/yourusername/VehicleRentalWebApp.git
+cd VehicleRentalWebApp
 ```
 
-Or using Maven installed locally:
+---
 
-```powershell
+### Build Project
+
+Using Maven Wrapper
+
+```bash
+./mvnw clean package
+```
+
+or
+
+```bash
 mvn clean package
 ```
 
+---
+
 ### Deploy
 
-Deploy the generated WAR file found at:
+Deploy the generated WAR file
 
 ```text
-target\VehicleRentalWebApp.war
+target/VehicleRentalWebApp.war
 ```
 
-to your servlet container.
+into your Tomcat server.
 
-### Initial Admin Setup
+---
 
-Because `WEB-INF/admin.txt` starts empty, add a manual admin entry before logging in as admin. Use this format:
+### Initial Administrator Setup
+
+Create the first administrator inside
 
 ```text
-admin:admin@example.com:Admin Name:adminpassword
+WEB-INF/admin.txt
 ```
 
-Place the line in `src/main/webapp/WEB-INF/admin.txt` or the deployed container’s `WEB-INF/admin.txt`.
+Example
 
-### First-Time User Setup
+```text
+admin:admin@example.com:Administrator:admin123
+```
 
-Register a user through the app interface at `register.jsp`. User data is appended to `WEB-INF/users.txt`.
+---
 
-## Usage
+## 📸 User Workflow
 
-### Public Access
+1. Register a new account
+2. Login
+3. Browse vehicles
+4. Select rental dates
+5. Upload payment slip
+6. Submit booking
+7. Wait for admin approval
+8. View notifications
+9. Leave a review
 
-- Home page: `index.jsp`
-- Vehicle listing: `vehicles`
-- Reviews: `reviews`
+---
 
-### User Actions
+## 🔒 Validation & Security
 
-- Register with a new account
-- Login at `login.jsp`
-- Book vehicles with start/end dates and upload JPEG payment slips
-- View bookings and notifications on `dashboard`
-- Submit reviews after login
+- Session-based authentication
+- Role separation (User/Admin)
+- File upload validation
+- JPEG-only payment slips
+- Maximum upload size (5MB)
+- Rental date validation
+- Servlet request validation
 
-### Admin Actions
+> **Note:** Passwords are currently stored as plain text because this project demonstrates file-based persistence. A production-ready implementation should use BCrypt hashing and database storage.
 
-- Login at `admin-login.jsp`
-- Manage vehicles at `vehicle-management`
-- Approve or reject bookings at `booking-management`
-- Manage users, admins, and notifications from the admin dashboard
+---
 
-## Notes
+## 💡 Technical Highlights
 
-- Passwords are stored in plain text in `WEB-INF` files.
-- This app is best suited for learning, demo, or prototype use cases.
-- For production use, replace text-file persistence with a database and add secure password hashing.
+- Java Jakarta EE MVC Architecture
+- Servlet Annotation-Based Routing
+- JSP Dynamic Pages
+- Tailwind CSS Responsive UI
+- File-Based Persistence
+- Multipart File Upload
+- Session Management
+- Modular Project Structure
+- Maven Build System
 
-## Recommended Enhancements
+---
 
-- Replace file-based storage with a relational database
-- Add password hashing and stronger authentication
-- Improve session management and authorization checks
-- Add image previews for uploaded payment slips
-- Add input validation on the client side
+## 🔮 Future Improvements
 
-## Contact
+- Migrate to MySQL or PostgreSQL
+- BCrypt Password Encryption
+- Spring Boot Migration
+- REST API Implementation
+- JWT Authentication
+- Email Notifications
+- Payment Gateway Integration
+- Vehicle Availability Calendar
+- Admin Analytics Dashboard
+- Docker Deployment
 
-For questions or updates, inspect the servlet classes under `src/main/java/com/vehicle/rental/vehiclerentalwebapp/`.
+---
+
+## 👨‍💻 Developer
+
+**F R M Fasri**  
+**IT24102049**
+
+BSc (Hons) Information Technology  
+Specialization in Cyber Security
+
+Sri Lanka Institute of Information Technology (SLIIT)
+
+---
+
+## 📫 Connect with Me
+
+[![GitHub](https://img.shields.io/badge/GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/faz04)
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-0077B5?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/m-fasri/)
+
+---
+
+⭐ If you found this project helpful, consider giving it a star on GitHub!
